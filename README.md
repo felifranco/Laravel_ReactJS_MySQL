@@ -117,6 +117,12 @@ Correr el proyecto
 ./vendor/bin/sail up
 ```
 
+Restaurar la base de datos con el comando de [`artisan migrate`](https://laravel.com/docs/master/migrations#running-migrations):
+
+```shell
+./vendor/bin/sail php artisan migrate
+```
+
 con el siguiente comando se puede finalizar la ejecución del proyecto:
 
 ```shell
@@ -157,12 +163,6 @@ El comando `build` del propio Sail es necesario ejecutarlo cada vez que se hacen
 
 ```shell
 ./vendor/bin/sail build
-```
-
-Restaurar la base de datos con el comando de [`artisan migrate`](https://laravel.com/docs/master/migrations#running-migrations):
-
-```shell
-./vendor/bin/sail php artisan migrate
 ```
 
 ```shell
