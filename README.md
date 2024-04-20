@@ -55,7 +55,7 @@ BLOB);
 
 ## Creación del proyecto
 
-Para crear un proyecto Laravel se ha optado utilizar `Laravel Sail` por su facilidad de ejecución. Según la documentación oficial de [Laravel Sail](https://laravel.com/docs/11.x/sail), _es una interfaz de línea de comandos liviana para interactuar con el entorno de desarrollo Docker de Laravel_. Como el entorno de desarrollo se encuentra en Linux se utilizará la guía [Sail on Linux](https://laravel.com/docs/11.x/installation#sail-on-linux):
+Para crear un proyecto Laravel se ha optado utilizar `Laravel Sail` por su facilidad de ejecución, la versatilidad de utilizar distintas versiones de PHP en un mismo equipo y la portabilidad. Según la documentación oficial de [Laravel Sail](https://laravel.com/docs/11.x/sail), _es una interfaz de línea de comandos liviana para interactuar con el entorno de desarrollo Docker de Laravel_. Como el entorno de desarrollo se encuentra en Linux se utilizará la guía [Sail on Linux](https://laravel.com/docs/11.x/installation#sail-on-linux):
 
 Definir el contexto de Docker que se utilizará
 
@@ -69,13 +69,49 @@ Crear un nuevo proyecto
 curl -s https://laravel.build/laravel-backend?with=mysql | bash
 ```
 
-Ingresamos a la carpeta `laravel-backend`
+Al finalizar la ejecución del comando se podrá ver un proyecto con todos los recursos necesarios. Con esto tenemos una versión preliminar del proyecto de backend base.
+
+## Cambios al proyecto
+
+Para crear un API con el proyecto Laravel con Sail primero ingresamos a la carpeta `laravel-backend`
 
 ```shell
 cd laravel-backend
 ```
 
-Al finalizar la ejecución del comando se podrá ver un proyecto con todos los recursos necesarios. Antes de levantarlo se modificará el archivo el [docker-compose.yml](./laravel-backend/docker-compose.yml) para que tenga una configuración de MySQL como en la sección [MySQL in Docker](#mysql-in-docker), se creará el archivo [0001_01_01_000003_create_forms_table.php](laravel-backend/database/migrations/0001_01_01_000003_create_forms_table.php) para que al ejecutar `RUN MIGRATIONS` se cree la tabla `form` y se modificarán las credenciales de la base de datos que se encuentran en el archivo [.env](./laravel-backend/.env). Una vez finalizadas esas modificaciones levantamos el proyecto:
+Antes de cualquier modificación en el código se modificará el archivo el [docker-compose.yml](./laravel-backend/docker-compose.yml) para que tenga una configuración de MySQL como en la sección [MySQL in Docker](#mysql-in-docker), y se modificarán las credenciales de la base de datos que se encuentran en el archivo [.env](./laravel-backend/.env). Luego de las modificaciones anteriores procedemos a crear un modelo para la tabla `Form` de la base de datos:
+
+```shell
+./vendor/bin/sail artisan make:model Form --migration
+```
+
+La ejecución del comando anterior creó el archivo [Form.php](./laravel-backend/app/Models/Form.php) y el archivo de migración [2024_04_20_161015_create_forms_table.php](./laravel-backend/database/migrations/2024_04_20_161015_create_forms_table.php).
+
+Ahora se corresponde crear un Controlador para la definición de las funciones del API Rest:
+
+```shell
+./vendor/bin/sail artisan make:controller FormController
+```
+
+Se creó el archivo [FormController.php](./laravel-backend/app/Http/Controllers/FormController.php). Crear una API, será la que recibirá las peticiones HTTP del backend:
+
+```shell
+./vendor/bin/sail php artisan install:api
+```
+
+Se creó el archivo [api.php](./laravel-backend/routes/api.php) y otros archivos de migración.
+
+## EJECUTAR EL PROYECTO
+
+### API Rest
+
+Ingresar a la carpeta `laravel-backend`
+
+```shell
+cd laravel-backend
+```
+
+Correr el proyecto
 
 ```shell
 ./vendor/bin/sail up
@@ -99,9 +135,13 @@ los argumentos a la derecha de `down` pertenecen a `Docker Compose` por lo que e
 docker compose down --rmi all -v --remove-orphans
 ```
 
-Con esto tenemos una versión preliminar del proyecto de backend base.
+```shell
 
-## Cambios al proyecto
+```
+
+```shell
+
+```
 
 ```shell
 
@@ -112,6 +152,22 @@ Con esto tenemos una versión preliminar del proyecto de backend base.
 ```
 
 # Notas
+
+El comando `build` del propio Sail es necesario ejecutarlo cada vez que se hacen cambios en el docker-compose.yml
+
+```shell
+./vendor/bin/sail build
+```
+
+Restaurar la base de datos con el comando de [`artisan migrate`](https://laravel.com/docs/master/migrations#running-migrations):
+
+```shell
+./vendor/bin/sail php artisan migrate
+```
+
+```shell
+
+```
 
 ```shell
 
@@ -127,9 +183,9 @@ Con esto tenemos una versión preliminar del proyecto de backend base.
 - [6.2.4 Connecting to the MySQL Server Using Command Options](https://dev.mysql.com/doc/refman/8.0/en/connecting.html)
 - [Eloquent: API Resources](https://laravel.com/docs/11.x/eloquent-resources)
 - [Laravel Installation - Docker Compose](https://laravel.com/docs/11.x/installation#sail-on-linux)
-- []()
-- []()
-- []()
-- []()
+- [Guía de Laravel Sail](https://desarrolloweb.com/articulos/laravel-sail)
+- [Available Column Types](https://laravel.com/docs/9.x/migrations?source=post_page-----80a516abdba1--------------------------------#available-column-types)
+- [Laravel CSRF Protection Guide](https://www.stackhawk.com/blog/laravel-csrf-protection-guide/)
+- [Validation](https://laravel.com/docs/11.x/validation)
 - []()
 - []()
