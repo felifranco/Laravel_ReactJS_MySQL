@@ -175,6 +175,10 @@ CREATE TABLE form (name VARCHAR(100), email VARCHAR(100), birth DATE, message VA
 BLOB);
 ```
 
+### Diagrama
+
+![ER_Diagram](./assets/ER.png)
+
 ## Laravel
 
 ### Creación del proyecto
