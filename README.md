@@ -13,6 +13,8 @@ Este proyecto solicita información a través de un formulario, lo envía al bac
 
 # Ejecutar el proyecto
 
+Para ejecutar el proyecto se necesita tener instalado `Docker`, `Docker Compose`, `NodeJS` y `NPM`.
+
 ## Backend
 
 Ingresar a la carpeta `laravel-backend`
