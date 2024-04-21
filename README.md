@@ -123,6 +123,10 @@ Restaurar la base de datos con el comando de [`artisan migrate`](https://laravel
 ./vendor/bin/sail php artisan migrate
 ```
 
+```shell
+./vendor/bin/sail up -d && ./vendor/bin/sail php artisan migrate
+```
+
 con el siguiente comando se puede finalizar la ejecución del proyecto:
 
 ```shell
