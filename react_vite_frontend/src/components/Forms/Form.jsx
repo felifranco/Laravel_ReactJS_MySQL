@@ -32,7 +32,6 @@ const Form = () => {
     if (e.target.files) {
       const inputFile = e.target.files[0];
       const imageBase64 = await toBase64(inputFile);
-      console.log(imageBase64);
       setData({ ...data, image: { valid: true, value: imageBase64 } });
     }
   };
@@ -170,7 +169,12 @@ const Form = () => {
           helperText={!data.message.valid ? "Ingrese un mensaje." : ""}
           error={!data.message.valid}
         />
-        <input id="file" type="file" onChange={handleFileChange} />
+        <input
+          id="file"
+          type="file"
+          onChange={handleFileChange}
+          accept="image/png, image/jpeg"
+        />
         <Button variant="contained" color="primary" onClick={handleClickAdd}>
           {isAttendingContact ? "Modificar" : "Agregar"}
         </Button>

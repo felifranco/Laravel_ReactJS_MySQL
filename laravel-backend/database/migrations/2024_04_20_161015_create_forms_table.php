@@ -20,6 +20,9 @@ return new class extends Migration
             $table->binary('image')->nullable();
             $table->timestamps();
         });
+
+        // UPDATE FOR LARGE IMAGES
+        DB::statement("ALTER TABLE basic_info.forms MODIFY COLUMN image LONGBLOB NULL;");
     }
 
     /**

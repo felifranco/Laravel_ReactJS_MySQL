@@ -59,6 +59,7 @@ const FormList = () => {
           component={"img"}
           alt="Vista previa"
           src={image.content}
+          sx={{ maxHeight: 500 }}
         />
       </>
     );
