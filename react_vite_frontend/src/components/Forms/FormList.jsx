@@ -33,7 +33,7 @@ const FormList = () => {
   const dispatch = useDispatch();
 
   const handleClickShowImage = (image) => {
-    setImage({ image: image, show: true });
+    setImage({ content: image, show: true });
   };
 
   const handleClickShowEdit = (contact) => {
@@ -58,7 +58,7 @@ const FormList = () => {
         <Box
           component={"img"}
           alt="Vista previa"
-          src="https://res.cloudinary.com/practicaldev/image/fetch/s--blK9u4_v--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/a86595fypnp8bws7b3em.jpg"
+          src={image.content}
         />
       </>
     );
